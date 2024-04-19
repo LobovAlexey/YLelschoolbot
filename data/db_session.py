@@ -51,3 +51,11 @@ def get_user(chatid: str, number: str) -> tuple[str, ...] | None:
     for user in db_sess.query(__all_models.User).filter(__all_models.User.chatid == chatid):
         return coding.decode(int(user.login), int(user.password), int(number))
     return None
+
+
+def delete_user(chatid: str) -> None:
+    from . import __all_models
+    db_sess = create_session()
+    db_sess.query(__all_models.User).filter(__all_models.User.chatid == chatid).delete()
+    db_sess.commit()
+    
