@@ -1,0 +1,8 @@
+telebot
+pandas
+fake-useragent
+beautifulsoup4
+requests
+sqlalchemy
+lxml
+
