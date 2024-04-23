@@ -4,12 +4,14 @@ import fake_useragent
 from bs4 import BeautifulSoup
 
 
-def get_diary(login: str, password: str, logging_str='') -> pd.DataFrame:
+def get_diary(login: str, password: str, logging=None) -> pd.DataFrame:
+    if logging is None:
+        logging = tuple()
     link = "https://elschool.ru/Logon/Index"
     session = requests.Session()
 
-    if logging_str:
-        print(f"{logging_str}: обработка запроса")
+    if logging:
+        logging[0].send_message(logging[1], "Обработка запроса")
 
     user = fake_useragent.UserAgent().random
     header = {'user-agent': user}
@@ -20,8 +22,8 @@ def get_diary(login: str, password: str, logging_str='') -> pd.DataFrame:
     }
     response = session.post(link, data=data, headers=header)
     st1 = response.url
-    if logging_str:
-        print(f"{logging_str}: выполнен вход")
+    if logging:
+        logging[0].send_message(logging[1], "Вполнен вход")
     if st1 != f"https://elschool.ru/users/privateoffice":
         raise ValueError
     response = response.text
