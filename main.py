@@ -2,7 +2,7 @@ import telebot
 from elschool import to_str, get_diary
 from data.db_session import add_user, get_user, delete_user, global_init
 
-token = '7044979299:AAHOS_fgqyuIrtE0I3bGS13VImdo9qzShKE'
+token: str
 bot = telebot.TeleBot(token)
 global_init('db/users.db')
 
